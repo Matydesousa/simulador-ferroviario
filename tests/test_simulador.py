@@ -55,6 +55,12 @@ class TestSimuladorFerroviario(unittest.TestCase):
         valido, _ = validar_datos_linea(["A", "B"], [5.0], 0)
         self.assertFalse(valido)
 
+        # Valores no finitos
+        valido, _ = validar_datos_linea(["A", "B"], [float("nan")], 60)
+        self.assertFalse(valido)
+        valido, _ = validar_datos_linea(["A", "B"], [5.0], float("inf"))
+        self.assertFalse(valido)
+
     def test_recorrido_sentido_directo(self):
         """Verifica una simulación de ida (San Miguel -> Retiro)."""
         res = calcular_recorrido(self.estaciones, self.distancias, self.velocidad_media, "san miguel", "retiro")
@@ -112,6 +118,9 @@ class TestSimuladorFerroviario(unittest.TestCase):
         costo_invalido_km = calcular_costo(10.0, 50.0, 0.0)
         self.assertFalse(costo_invalido_km["es_valido"])
 
+        costo_no_finito = calcular_costo(10.0, 50.0, float("nan"))
+        self.assertFalse(costo_no_finito["es_valido"])
+
     def test_estadisticas_linea(self):
         """Verifica el cálculo de estadísticas generales de la línea."""
         stats = calcular_estadisticas(self.estaciones, self.distancias, self.velocidad_media, self.distancia_total)
@@ -151,4 +160,3 @@ class TestSimuladorFerroviario(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

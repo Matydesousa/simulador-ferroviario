@@ -11,6 +11,7 @@ Contiene las funciones principales para:
 - Algoritmo de ordenamiento por burbuja para el historial de simulaciones.
 """
 
+from math import isfinite
 from typing import List, Tuple, Dict, Any
 
 
@@ -76,7 +77,7 @@ def validar_datos_linea(
     for i, dist in enumerate(distancias):
         try:
             val = float(dist)
-            if val <= 0:
+            if not isfinite(val) or val <= 0:
                 return False, f"La distancia del tramo {i + 1} ({estaciones[i]} -> {estaciones[i + 1]}) debe ser positiva."
         except (ValueError, TypeError):
             return False, f"La distancia del tramo {i + 1} debe ser un número válido."
@@ -84,7 +85,7 @@ def validar_datos_linea(
     # Validar velocidad media positiva
     try:
         vel = float(velocidad_media)
-        if vel <= 0:
+        if not isfinite(vel) or vel <= 0:
             return False, "La velocidad media del tren debe ser positiva."
     except (ValueError, TypeError):
         return False, "La velocidad media debe ser un número válido."
@@ -126,6 +127,12 @@ def calcular_recorrido(
     - carteles: List[Dict] (cada cartel con num, estacion_actual, siguiente_estacion, tiempo_valor, tiempo_unidad, distancia_tramo)
     - cartel_final: Dict (estacion_actual, tiempo_total_minutos)
     """
+    datos_validos, mensaje_error = validar_datos_linea(
+        estaciones, distancias, velocidad_media
+    )
+    if not datos_validos:
+        return {"es_valido": False, "mensaje_error": mensaje_error}
+
     pos_inicio = buscar_posicion_estacion(estaciones, inicio)
     pos_destino = buscar_posicion_estacion(estaciones, destino)
 
@@ -231,6 +238,10 @@ def calcular_costo(
     Calcula el costo del viaje a partir de la distancia recorrida, tarifa base y tarifa por km.
     Fórmula original: precio = tarifa_base + km_total * tarifa_km
     """
+    if not all(isfinite(valor) for valor in (distancia_km, tarifa_base, tarifa_km)):
+        return {"es_valido": False, "mensaje_error": "Las tarifas y la distancia deben ser números finitos."}
+    if distancia_km < 0:
+        return {"es_valido": False, "mensaje_error": "La distancia no puede ser negativa."}
     if tarifa_km <= 0:
         return {"es_valido": False, "mensaje_error": "La tarifa por kilómetro debe ser un número positivo."}
     if tarifa_base < 0:
@@ -335,4 +346,3 @@ def ordenar_simulaciones_por_distancia(
         num_pasada -= 1
 
     return simulaciones_ordenadas, distancias_ordenadas
-

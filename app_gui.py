@@ -44,7 +44,7 @@ class SimuladorFerroviarioApp:
 
         self.root.title("RAIL BOARD — Simulador Ferroviario")
         self.root.geometry("960x720")
-        self.root.minsize(860, 620)
+        self.root.minsize(900, 680)
         self.root.configure(bg=COLOR_BG)
 
         # Estado del programa (idéntico al original)
@@ -408,6 +408,20 @@ class SimuladorFerroviarioApp:
         frame_bottom.pack(fill=tk.X, padx=25)
 
         def guardar_datos():
+            try:
+                cantidad_indicada = int(entry_num_est.get())
+            except ValueError:
+                messagebox.showerror("Error", "Ingrese una cantidad de estaciones válida.")
+                return
+
+            if cantidad_indicada != len(entradas_estaciones):
+                messagebox.showwarning(
+                    "Campos sin actualizar",
+                    "Después de cambiar la cantidad de estaciones, presione "
+                    "'Generar Campos' antes de guardar.",
+                )
+                return
+
             est_list = [e.get().strip() for e in entradas_estaciones]
             dist_list = []
             for d in entradas_distancias:
@@ -1296,4 +1310,3 @@ class SimuladorFerroviarioApp:
         """Inicia el bucle principal de la aplicación gráfica."""
         if self._owns_root:
             self.root.mainloop()
-
