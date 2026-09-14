@@ -1,0 +1,27 @@
+name: Python CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Obtener el código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Verificar sintaxis
+        run: python -m py_compile main.py logica.py app_gui.py
+
+      - name: Ejecutar pruebas
+        run: xvfb-run -a python -m unittest discover -s tests -v

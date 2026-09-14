@@ -1,5 +1,7 @@
 # RailBoard — Simulador Ferroviario
 
+[![Python CI](https://github.com/Matydesousa/simulador-ferroviario/actions/workflows/python.yml/badge.svg)](https://github.com/Matydesousa/simulador-ferroviario/actions/workflows/python.yml)
+
 Aplicación de escritorio interactiva desarrollada en Python para simular el panel informativo, los recorridos, los tiempos estimados, las tarifas y las estadísticas de una línea ferroviaria.
 
 El proyecto nació como trabajo final de **Introducción a la Programación**. Esta versión reemplaza la interacción por terminal con una interfaz gráfica en Tkinter, conservando el flujo, los cálculos y el algoritmo de ordenamiento por burbuja del trabajo original.
@@ -49,6 +51,7 @@ py -3 -m unittest discover -s tests -v
 
 ```text
 simulador-ferroviario/
+├── .github/workflows/       # Integración continua
 ├── main.py                  # Punto de entrada
 ├── app_gui.py               # Interfaz gráfica y flujo de la aplicación
 ├── logica.py                # Recorridos, tarifas, estadísticas y ordenamiento
@@ -56,6 +59,7 @@ simulador-ferroviario/
 │   ├── test_simulador.py   # Pruebas de la lógica
 │   └── test_gui_smoke.py   # Comprobación de las vistas gráficas
 ├── README.md
+├── LICENSE                  # Licencia MIT
 └── .gitignore
 ```
 
@@ -68,3 +72,7 @@ La línea precargada utiliza datos ilustrativos. Sus distancias y tiempos no rep
 Desarrollado por **Matías Joaquín De Sousa** como proyecto final de introducción a la programación.
 
 GitHub: [Matydesousa](https://github.com/Matydesousa)
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia MIT.
