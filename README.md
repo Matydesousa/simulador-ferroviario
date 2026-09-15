@@ -5,12 +5,12 @@
 [![Python CI](https://img.shields.io/github/actions/workflow/status/Matydesousa/simulador-ferroviario/python.yml?branch=main&label=Python%20CI&logo=githubactions&logoColor=white&style=flat-square)](https://github.com/Matydesousa/simulador-ferroviario/actions/workflows/python.yml)
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B%20%7C%203.13-3776AB?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![GUI](https://img.shields.io/badge/GUI-Tkinter%20%2F%20ttk-FFD43B?style=flat-square&logoColor=black)](app_gui.py)
-[![Tests](https://img.shields.io/badge/Tests-unittest%20(100%25%20Passed)-brightgreen?style=flat-square)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-unittest-4B8BBE?style=flat-square)](tests/)
 [![License: MIT](https://img.shields.io/badge/Licencia-MIT-green?style=flat-square)](LICENSE)
 
 ---
 
-Aplicación de escritorio interactiva desarrollada en Python para simular paneles informativos, recorridos, tiempos estimados, tarifas y estadísticas de una red ferroviaria.
+Aplicación de escritorio interactiva desarrollada en Python para simular paneles informativos, recorridos, tiempos estimados, tarifas y estadísticas de una línea ferroviaria.
 
 </div>
 
@@ -54,7 +54,7 @@ flowchart TD
 
 | Característica | Detalle |
 | :--- | :--- |
-| **⚙️ Configuración Guiada** | Carga manual de estaciones, distancias y velocidad media, con validación de datos en tiempo real. |
+| **⚙️ Configuración Guiada** | Carga manual de estaciones, distancias y velocidad media, con validación antes de confirmar la línea. |
 | **🚉 Línea San Martín Precargada** | Configuración de ejemplo con 15 estaciones y distancias parametrizadas para pruebas inmediatas. |
 | **↔️ Simulación Bidireccional** | Cálculo de itinerarios y tiempos estimados tanto en sentido directo (*ida*) como inverso (*vuelta*). |
 | **📋 Panel de Estación Dinámico** | Carteles secuenciales interactivos con opción de avance manual paso a paso o reproducción automática. |
@@ -66,7 +66,7 @@ flowchart TD
 
 ## 🛠️ Tecnologías
 
-- **Python 3.10+ / 3.13**: Tipado estático con `typing`, modularización y manejo de excepciones.
+- **Python 3.10+ / 3.13**: Anotaciones de tipos con `typing`, modularización y manejo de excepciones.
 - **Tkinter & TTK**: Widgets de interfaz nativos, temas y gestión de ventanas multiplataforma.
 - **Unittest**: Suite de pruebas unitarias y pruebas de humo (*smoke tests*) de la interfaz gráfica.
 - **GitHub Actions & Xvfb**: Integración continua automatizada con servidor gráfico virtual para entornos headless de Linux.
@@ -91,7 +91,7 @@ python3 main.py
 
 ## 🧪 Pruebas Automatizadas
 
-La suite de pruebas cubre validaciones de datos, cálculos tarifarios, algoritmos de ordenamiento y renderizado de vistas:
+La suite de pruebas cubre validaciones de datos, cálculos tarifarios, algoritmos de ordenamiento, construcción de vistas y navegación por el flujo gráfico:
 
 ```powershell
 # Ejecutar todas las pruebas unitarias con reporte detallado
